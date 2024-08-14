@@ -1,7 +1,7 @@
 # forms.py
 
 from django import forms
-from .models import Producto, CarritoProducto
+from .models import Producto, Carrito
 
 class ProductoForm(forms.ModelForm):
     class Meta:
@@ -10,5 +10,5 @@ class ProductoForm(forms.ModelForm):
 
 class CarritoProductoForm(forms.ModelForm):
     class Meta:
-        model = CarritoProducto
+        model = Carrito
         fields = ['producto', 'cantidad']

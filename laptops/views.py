@@ -6,7 +6,7 @@ from django.db import IntegrityError
 
 
 from django.contrib.auth.decorators import login_required
-from .models import Carrito, Producto
+from .models import Carrito, Producto,Compra, DetalleCompra
 
 
 from django.http import HttpResponse
@@ -96,3 +96,51 @@ def agregar_al_carrito(request):
             carrito_item.save()
         
         return redirect('catalogo')  # Redirigir a la página de catálogo o a donde quieras
+
+#historial de compras
+@login_required
+def historial_compras(request):
+    compras = Compra.objects.filter(usuario=request.user).order_by('-fecha')
+    return render(request, 'historial_compras.html', {'compras': compras})
+
+@login_required
+def historial_compras(request):
+    if request.method == 'POST':
+        # Process the form data (e.g., create a new purchase)
+        carrito_items = Carrito.objects.filter(usuario=request.user)
+        total = sum(item.cantidad * item.producto.precio for item in carrito_items)
+        
+        # Create the purchase
+        compra = Compra.objects.create(usuario=request.user, total=total)
+        
+        # Create the purchase details
+        for item in carrito_items:
+            DetalleCompra.objects.create(
+                compra=compra,
+                producto=item.producto,
+                cantidad=item.cantidad,
+                precio=item.producto.precio
+            )
+        compras = Compra.objects.filter(usuario=request.user).order_by('-fecha')
+    
+        # Calculate the total for each purchase
+        for compra in compras:
+            compra.total = sum(detalle.cantidad * detalle.precio for detalle in compra.detallecompra_set.all())
+        
+        # Clear the cart
+        carrito_items.delete()
+        
+        # Redirect to the purchase confirmation page
+        return redirect('purchase_confirmation', compra_id=compra.id)
+    
+    compras = Compra.objects.filter(usuario=request.user).order_by('-fecha')
+    return render(request, 'historial_compras.html', {'compras': compras})
+
+def purchase_confirmation(request, compra_id):
+    compra = Compra.objects.get(id=compra_id, usuario=request.user)
+    return render(request, 'purchase_confirmation.html', {'compra': compra})
+
+@login_required
+def detalle_compra(request, compra_id):
+    compra = Compra.objects.get(id=compra_id, usuario=request.user)
+    return render(request, 'detalle_compra.html', {'compra': compra})

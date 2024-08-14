@@ -28,4 +28,8 @@ urlpatterns = [
 
     path('agregar-al-carrito/', views.agregar_al_carrito, name='agregar_al_carrito'),
     path('carrito/', views.carrito, name='carrito'),
+
+    path('historial_compras/', views.historial_compras, name='historial_compras'),
+    path('historial_compras/<int:compra_id>/', views.detalle_compra, name='detalle_compra'),
+    
 ]

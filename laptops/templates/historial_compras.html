@@ -1,0 +1,28 @@
+{% extends 'plantilla.html' %}
+{% block content %}
+<h1>Historial de Compras</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Detalles</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for compra in compras %}
+            <tr>
+                <td>{{ compra.id }}</td>
+                <td>{{ compra.fecha }}</td>
+                <td>${{ compra.total|floatformat:2 }}</td>
+                <td><a href="./detalle_compra.html">Ver Detalles</a></td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4">No has realizado ninguna compra aún.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

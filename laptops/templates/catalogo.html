@@ -2,6 +2,22 @@
 {% load static %}
 
 {% block content %}
+<style>
+        .btn-agregar {
+        background-color: #4CAF50; /* Color de fondo verde */
+        color: white; /* Color de fuente blanco */
+        padding: 10px 20px; /* Espacio interno */
+        border: none; /* Sin borde */
+        border-radius: 5px; /* Redondeado de esquinas */
+        cursor: pointer; /* Cambia el cursor a una mano al pasar por encima */
+        font-size: 16px; /* Tamaño de fuente */
+        text-transform: uppercase; /* Texto en mayúsculas */
+    }
+
+    .btn-agregar:hover {
+        background-color: #45a049; /* Color de fondo verde oscuro al pasar por encima */
+    }
+</style>
 <div class="contenedor-imagenes">
     <div class="img1">
         <img src="{% static 'img/pc1.jpeg' %}" alt="Imagen 1">
@@ -10,7 +26,7 @@
             {% csrf_token %}
             <input type="hidden" name="nombre" value="dell i7 16GB RAM 256GB SSD">
             <input type="hidden" name="precio" value="1000"> <!-- Ajusta el precio según corresponda -->
-            <button type="submit">Add</button>
+            <button class="btn-agregar" type="submit">Add</button>
         </form>
     </div>
     <div class="img2">
@@ -20,7 +36,7 @@
             {% csrf_token %}
             <input type="hidden" name="nombre" value="hp i5 16GB RAM 256GB SSD">
             <input type="hidden" name="precio" value="900"> <!-- Ajusta el precio según corresponda -->
-            <button type="submit">Add</button>
+            <button class="btn-agregar" type="submit">Add</button>
         </form>
     </div>
     <div class="img3">
@@ -30,7 +46,7 @@
             {% csrf_token %}
             <input type="hidden" name="nombre" value="lenovo i5 16GB RAM 128 NVME">
             <input type="hidden" name="precio" value="800"> <!-- Ajusta el precio según corresponda -->
-            <button type="submit">Add</button>
+            <button class="btn-agregar" type="submit">Add</button>
         </form>
     </div>
 </div>
