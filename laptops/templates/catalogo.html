@@ -1,0 +1,37 @@
+{% extends 'plantilla.html' %}
+{% load static %}
+
+{% block content %}
+<div class="contenedor-imagenes">
+    <div class="img1">
+        <img src="{% static 'img/pc1.jpeg' %}" alt="Imagen 1">
+        <p>dell i7 16GB RAM 256GB SSD</p>
+        <form method="POST" action="{% url 'agregar_al_carrito' %}">
+            {% csrf_token %}
+            <input type="hidden" name="nombre" value="dell i7 16GB RAM 256GB SSD">
+            <input type="hidden" name="precio" value="1000"> <!-- Ajusta el precio según corresponda -->
+            <button type="submit">Add</button>
+        </form>
+    </div>
+    <div class="img2">
+        <img src="{% static 'img/pc2.jpeg' %}" alt="Imagen 2">
+        <p>hp i5 16GB RAM 256GB SSD</p>
+        <form method="POST" action="{% url 'agregar_al_carrito' %}">
+            {% csrf_token %}
+            <input type="hidden" name="nombre" value="hp i5 16GB RAM 256GB SSD">
+            <input type="hidden" name="precio" value="900"> <!-- Ajusta el precio según corresponda -->
+            <button type="submit">Add</button>
+        </form>
+    </div>
+    <div class="img3">
+        <img src="{% static 'img/pc3.jpeg' %}" alt="Imagen 3">
+        <p>lenovo i5 16GB RAM 128 NVME</p>
+        <form method="POST" action="{% url 'agregar_al_carrito' %}">
+            {% csrf_token %}
+            <input type="hidden" name="nombre" value="lenovo i5 16GB RAM 128 NVME">
+            <input type="hidden" name="precio" value="800"> <!-- Ajusta el precio según corresponda -->
+            <button type="submit">Add</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

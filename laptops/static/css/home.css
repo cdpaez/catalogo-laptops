@@ -1,0 +1,37 @@
+/* Estilo para el título con clase .home */
+.home {
+    text-align: center;              /* Centra el texto del título */
+    color: #333;                     /* Color del texto */
+    margin-top: 20px;               /* Espaciado superior */
+    margin-bottom: 10px;            /* Espaciado inferior */
+}
+
+/* Estilo específico para el h1 con clase .home */
+.home.h1 {
+    font-size: 2.5em;                /* Tamaño de fuente grande para el título */
+}
+
+/* Estilo específico para el p con clase .home */
+.home.p {
+    font-size: 1.2em;                /* Tamaño de fuente para el párrafo */
+    color: #666;                     /* Color del texto */
+    line-height: 1.5;                /* Altura de línea para mejorar legibilidad */
+    margin: 0 20px;                 /* Espaciado lateral */
+}
+
+/* Estilo para el contenedor principal */
+.contenedor-principal {
+    display: flex;                  /* Utiliza Flexbox para centrar contenido */
+    justify-content: center;        /* Centra el contenido horizontalmente */
+    align-items: center;            /* Centra el contenido verticalmente */
+    flex-direction: column;         /* Organiza los elementos en una columna */
+    padding: 20px;                  /* Espaciado interno del contenedor */
+    text-align: center;             /* Centra el texto dentro del contenedor */
+}
+
+.contenedor-principal img {
+    max-width: 100%;                /* Ajusta la imagen al ancho del contenedor */
+    height: 600px;                   /* Mantiene la proporción de la imagen */
+    border-radius: 8px;             /* Opcional: bordes redondeados para la imagen */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Opcional: sombra sutil para la imagen */
+}

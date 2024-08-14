@@ -1,0 +1,10 @@
+{% extends 'plantilla.html'%}
+{% block content %}
+<h1 class="inicio">incio de sesion</h1>
+{{error}}
+<form class="formulario" action="/inicio/" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn-formulario">iniciar</button>
+</form>
+{% endblock %}

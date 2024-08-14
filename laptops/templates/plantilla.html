@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/catalogo.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/inicio.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/registro.css' %}" type="text/css">
+    <title>Catalogo de Laptops</title>
+</head>
+<body>
+    <nav class="nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/salir">Salir</a></li>
+            <li><a href="/catalogo">Catalogo</a></li>
+            <li><a href="/carrito">Carrito</a></li>
+            {% else %}
+            <li><a href="/registro">Registro</a></li>
+            <li><a href="/inicio">Inicio</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% block content %}
+    {% endblock %}
+    
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends 'plantilla.html'%}
+{% block content%}
+<h1 class="registro">registro</h1>
+{{error}}
+<form class="formulario-registro" action="/registro/" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn-formulario-registro">registrarse</button>
+</form>
+{% endblock%}

@@ -1,0 +1,45 @@
+.nav {
+    background-color: #333;           /* Color de fondo del menú de navegación */
+    padding: 10px;                    /* Espaciado interno del menú */
+}
+
+.nav ul {
+    list-style-type: none;            /* Elimina los puntos de la lista */
+    margin: 0;                        /* Elimina el margen por defecto */
+    padding: 0;                        /* Elimina el padding por defecto */
+    display: flex;                    /* Muestra los elementos en una fila */
+    justify-content: center;          /* Centra los elementos horizontalmente */
+}
+
+.nav li {
+    margin: 0 15px;                   /* Espaciado horizontal entre los elementos de la lista */
+}
+
+.nav a {
+    color: #fff;                      /* Color del texto del enlace */
+    text-decoration: none;            /* Elimina el subrayado del texto del enlace */
+    font-size: 16px;                  /* Tamaño de la fuente del enlace */
+    padding: 5px 10px;                /* Espaciado interno del enlace */
+    display: block;                   /* Hace que el enlace ocupe todo el área del <li> */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave para el cambio de color */
+}
+
+.nav a:hover {
+    background-color: #555;           /* Color de fondo al pasar el ratón sobre el enlace */
+    color: #ffd700;                   /* Color del texto al pasar el ratón sobre el enlace */
+    border-radius: 5px;               /* Opcional: bordes redondeados en el enlace */
+}
+.contenedor-imagenes {
+    display: flex;                /* Utiliza Flexbox para alinear las imágenes en una fila */
+    justify-content: center;      /* Centra las imágenes horizontalmente */
+    gap: 10px;                    /* Espaciado de 10px entre las imágenes */
+    padding: 10px;                /* Espaciado interno del contenedor */
+    flex-wrap: wrap;              /* Permite que las imágenes se envuelvan si el espacio es insuficiente */
+}
+
+.contenedor-imagenes img {
+    max-width: 100%;              /* Asegura que las imágenes no se salgan del contenedor */
+    height: 200px;                 /* Mantiene la proporción de las imágenes */
+    border-radius: 8px;           /* Opcional: agrega bordes redondeados a las imágenes */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Opcional: agrega una sombra sutil a las imágenes */
+}

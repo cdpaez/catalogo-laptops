@@ -1,0 +1,50 @@
+/* Estilo para el título con clase .inicio */
+.inicio {
+    font-size: 2em;                /* Tamaño de fuente grande para el título */
+    color: #333;                   /* Color del texto */
+    text-align: center;            /* Centra el texto del título */
+    margin-top: 20px;             /* Espaciado superior */
+    margin-bottom: 20px;          /* Espaciado inferior */
+}
+
+/* Estilo para el mensaje de error */
+.error {
+    color: #d9534f;                /* Color rojo para mensajes de error */
+    font-size: 1em;                /* Tamaño de fuente del mensaje de error */
+    text-align: center;            /* Centra el mensaje de error */
+    margin-bottom: 20px;          /* Espaciado inferior */
+}
+
+/* Estilo para el formulario */
+.formulario {
+    max-width: 400px;              /* Ancho máximo del formulario */
+    margin: 0 auto;                /* Centra el formulario horizontalmente */
+    padding: 20px;                /* Espaciado interno del formulario */
+    border: 1px solid #ddd;        /* Borde sutil alrededor del formulario */
+    border-radius: 8px;            /* Bordes redondeados para el formulario */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para el formulario */
+    background-color: #f9f9f9;    /* Color de fondo del formulario */
+}
+
+/* Estilo para los campos del formulario */
+.formulario input,
+.formulario select,
+.formulario textarea {
+    width: 100%;                   /* Hace que los campos ocupen el ancho completo del formulario */
+    padding: 10px;                /* Espaciado interno de los campos */
+    margin-bottom: 15px;          /* Espaciado inferior entre los campos */
+    border: 1px solid #ccc;       /* Borde de los campos */
+    border-radius: 4px;           /* Bordes redondeados para los campos */
+    box-sizing: border-box;       /* Asegura que el padding y el borde no aumenten el tamaño total del campo */
+}
+
+/* Estilo para el botón del formulario */
+.btn-formulario {
+    background-color: #007bff;    /* Color de fondo del botón */
+    color: #fff;                  /* Color del texto del botón */
+    border: none;                 /* Elimina el borde por defecto del botón */
+    padding: 10px 20px;           /* Espaciado interno del botón */
+    font-size: 1em;               /* Tamaño de fuente del botón */
+    border-radius: 4px;           /* Bordes redondeados para el botón */
+    cursor: pointer;
+}
