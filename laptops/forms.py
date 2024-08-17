@@ -1,14 +1,14 @@
 # forms.py
 
 from django import forms
-from .models import Producto, Carrito
+from .models import cliente_Tienda, producto_Tienda
 
-class ProductoForm(forms.ModelForm):
+class clienteForm(forms.ModelForm):
     class Meta:
-        model = Producto
-        fields = ['nombre', 'precio', 'descripcion']
+        model = cliente_Tienda
+        fields = ['nombre_cliente', 'apellido_cliente']
 
-class CarritoProductoForm(forms.ModelForm):
+class productoForm(forms.ModelForm):
     class Meta:
-        model = Carrito
-        fields = ['producto', 'cantidad']
+        model = producto_Tienda
+        fields = ['nombre_producto', 'precio_producto', 'imagen']

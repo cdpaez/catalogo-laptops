@@ -16,20 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from laptops import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name='home'),
+    #urls para inicio de sesion
     path('registro/',views.registro,name='registro'),
-    path('catalogo/',views.catalogo,name='catalogo'),
     path('salir/',views.salir,name='salir'),
     path('inicio/',views.inicio,name='inicio'),
-
-    path('agregar-al-carrito/', views.agregar_al_carrito, name='agregar_al_carrito'),
-    path('carrito/', views.carrito, name='carrito'),
-
-    path('historial_compras/', views.historial_compras, name='historial_compras'),
-    path('historial_compras/<int:compra_id>/', views.detalle_compra, name='detalle_compra'),
-    
-]
+    path('dashboard/', views.dashboard,name='dashboard')
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,17 +1,14 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from django.db import IntegrityError 
+from django.db import IntegrityError
+from .forms import clienteForm, productoForm
+from .models import cliente_Tienda,producto_Tienda
 
 
-from django.contrib.auth.decorators import login_required
-from .models import Carrito, Producto,Compra, DetalleCompra
 
-
-from django.http import HttpResponse
-
-# Create your views here.
+#registro de usuario
 def home(request):
     return render(request, 'home.html')
 def registro(request):
@@ -39,13 +36,6 @@ def registro(request):
             'form': UserCreationForm,
             'error': 'las contrasenas no coinciden'
         })
-    
-def catalogo(request):
-    return render(request,'catalogo.html')
-
-def salir(request):
-    logout(request)
-    return redirect('home')
 def inicio(request):
     if request.method == 'GET':
         return render(request,'inicio.html',{
@@ -61,86 +51,37 @@ def inicio(request):
             })
         else:
             login(request,user)
-            return redirect('catalogo')
+            return redirect('dashboard')
+       
+def salir(request):
+    logout(request)
+    return redirect('home')
 
-#carrito
-@login_required
-def carrito(request):
-    carrito_items = Carrito.objects.filter(usuario=request.user)
-    
-    # Calcular el total para cada producto en el carrito y el total general
-    for item in carrito_items:
-        item.total = item.cantidad * item.producto.precio
-    
-    total_general = sum(item.total for item in carrito_items)
-    
-    return render(request, 'carrito.html', {'carrito_items': carrito_items, 'total_general': total_general})
-
-
-
-@login_required
-def agregar_al_carrito(request):
+def dashboard(request):
     if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        precio = request.POST.get('precio')
-        
-        # Verificar si el producto ya está en la base de datos
-        producto, creado = Producto.objects.get_or_create(nombre=nombre, defaults={'precio': precio})
-        
-        # Agregar el producto al carrito
-        carrito_item, creado = Carrito.objects.get_or_create(usuario=request.user, producto=producto, defaults={'cantidad': 1})
-        
-        if not creado:
-            # Si el producto ya estaba en el carrito, incrementar la cantidad
-            carrito_item.cantidad += 1
-            carrito_item.save()
-        
-        return redirect('catalogo')  # Redirigir a la página de catálogo o a donde quieras
+        if 'client-form' in request.POST:
+            form_client = clienteForm(request.POST)
+            if form_client.is_valid():
+                form_client.save()
+                return redirect('dashboard')
+        elif 'product-form' in request.POST:
+            form_product = productoForm(request.POST, request.FILES)
+            if form_product.is_valid():
+                form_product.save()
+                return redirect('dashboard')
+    else:
+        form_client = clienteForm()
+        form_product = productoForm()
 
-#historial de compras
-@login_required
-def historial_compras(request):
-    compras = Compra.objects.filter(usuario=request.user).order_by('-fecha')
-    return render(request, 'historial_compras.html', {'compras': compras})
+    clientes = cliente_Tienda.objects.all()
+    productos = producto_Tienda.objects.all()
 
-@login_required
-def historial_compras(request):
-    if request.method == 'POST':
-        # Process the form data (e.g., create a new purchase)
-        carrito_items = Carrito.objects.filter(usuario=request.user)
-        total = sum(item.cantidad * item.producto.precio for item in carrito_items)
-        
-        # Create the purchase
-        compra = Compra.objects.create(usuario=request.user, total=total)
-        
-        # Create the purchase details
-        for item in carrito_items:
-            DetalleCompra.objects.create(
-                compra=compra,
-                producto=item.producto,
-                cantidad=item.cantidad,
-                precio=item.producto.precio
-            )
-        compras = Compra.objects.filter(usuario=request.user).order_by('-fecha')
-    
-        # Calculate the total for each purchase
-        for compra in compras:
-            compra.total = sum(detalle.cantidad * detalle.precio for detalle in compra.detallecompra_set.all())
-        
-        # Clear the cart
-        carrito_items.delete()
-        
-        # Redirect to the purchase confirmation page
-        return redirect('purchase_confirmation', compra_id=compra.id)
-    
-    compras = Compra.objects.filter(usuario=request.user).order_by('-fecha')
-    return render(request, 'historial_compras.html', {'compras': compras})
+    contexto = {
+        'clientes': clientes,
+        'productos':productos,
+        'form_client': form_client,
+        'form_product': form_product,
+    }
 
-def purchase_confirmation(request, compra_id):
-    compra = Compra.objects.get(id=compra_id, usuario=request.user)
-    return render(request, 'purchase_confirmation.html', {'compra': compra})
-
-@login_required
-def detalle_compra(request, compra_id):
-    compra = Compra.objects.get(id=compra_id, usuario=request.user)
-    return render(request, 'detalle_compra.html', {'compra': compra})
+        
+    return render (request, 'dashboard.html',contexto)

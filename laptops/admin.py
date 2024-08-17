@@ -1,9 +1,6 @@
 from django.contrib import admin
-from .models import Producto,Carrito,Compra,DetalleCompra
+from .models import cliente_Tienda, producto_Tienda
 #registrar las tablas en el panel de administracion de django
 
-admin.site.register(Producto)
-admin.site.register(Carrito)
-admin.site.register(Compra)
-admin.site.register(DetalleCompra)
-
+admin.site.register(cliente_Tienda)
+admin.site.register(producto_Tienda)

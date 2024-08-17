@@ -1,0 +1,48 @@
+{% extends 'plantilla.html'%}
+
+{% block content %}
+<main class="contenido-principal">
+    <div class="contenedor-formulario">
+        <h1>datos cliente</h1>
+    <h3>ingresar datos</h3>
+    <form action="/dashboard/" method="POST">
+        {% csrf_token %}
+        {{form_client.as_p}}
+        <button type="submit" name="client-form">guardar</button>
+    </form>
+    <h3>ingresar datos del producto</h3>
+    <form action="/dashboard/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form_product.as_p}}
+        <button type="submit" name="product-form">guardar</button>
+    </form>
+
+    <label for="cliente">Seleccione un Cliente:</label>
+    <select name="cliente" id="cliente">
+        {% for elemento in clientes %}
+            <option value="{{ clientes.id_cliente }}">
+                {{ elemento.nombre_cliente }} {{ elemento.apellido_cliente }}
+            </option>
+        {% empty %}
+            <option value="">No hay clientes disponibles</option>
+        {% endfor %}
+    </select>
+    </div>
+    
+    <div class="informacion">
+        <h1>lista de productos</h1>
+        <ul>
+            {% for producto in productos %}
+                <li>
+                    <h2>{{ producto.nombre_producto }}</h2>
+                    <p>Precio: ${{ producto.precio_producto }}</p>
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+   
+</main>
+{% endblock %}
